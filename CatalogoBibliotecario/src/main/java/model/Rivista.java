@@ -2,12 +2,19 @@ package model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "riviste")
 public class Rivista extends SupportoCartaceo{
 	
 
 	private Periodicità periodicità;
 	
 	// COSTRUTTORE
+	public Rivista() {};
+	
 	public Rivista(Long codiceISBN, String titolo, LocalDate annoPubblicazione, Integer numeroPagine) {
 		super(codiceISBN, titolo, annoPubblicazione, numeroPagine);
 		

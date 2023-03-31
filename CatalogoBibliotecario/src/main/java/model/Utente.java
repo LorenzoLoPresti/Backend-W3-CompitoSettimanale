@@ -48,9 +48,5 @@ public class Utente {
 	public void setDataDiNascita(LocalDate dataDiNascita) {
 		this.dataDiNascita = dataDiNascita;
 	}
-
-	
-	
-	
 	
 }

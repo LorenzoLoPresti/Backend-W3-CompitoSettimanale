@@ -2,8 +2,16 @@ package model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class SupportoCartaceo {
 	
+	@Id
 	private Long codiceISBN;
 	private String titolo;
 	private LocalDate annoPubblicazione;
@@ -11,6 +19,11 @@ public abstract class SupportoCartaceo {
 	
 	
 	// COSTRUTTORE
+	public SupportoCartaceo() {
+		super();
+	}
+	
+	
 	public SupportoCartaceo(Long codiceISBN, String titolo, LocalDate annoPubblicazione, Integer numeroPagine) {
 		super();
 		this.codiceISBN = codiceISBN;
@@ -18,6 +31,7 @@ public abstract class SupportoCartaceo {
 		this.annoPubblicazione = annoPubblicazione;
 		this.numeroPagine = numeroPagine;
 	}
+
 
 	// GETTER E SETTER
 	public Long getCodiceISBN() {
