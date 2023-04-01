@@ -12,6 +12,7 @@ import model.Genere;
 import model.Libro;
 import model.Periodicità;
 import model.Rivista;
+import model.SupportoCartaceo;
 import model.Utente;
 
 public class MainProject {
@@ -43,31 +44,20 @@ public class MainProject {
         utente1.setDataDiNascita(LocalDate.of(1992, 03, 12));
 
        // aggiungiUtente(utente1);
-       // aggiungiLibro(libro1);
+       // aggiungiElemento(libro1);
        // aggiungiRivista(rivista1);
+        
+        List<SupportoCartaceo> catalogo = recuperaCatalogo();
+        catalogo.forEach(e -> System.out.println(e));
 
     }
 
-    public static void aggiungiLibro(Libro libro) {
+    public static void aggiungiElemento(SupportoCartaceo elem) {
         try {
         em.getTransaction().begin();
-        em.persist(libro);
+        em.persist(elem);
         em.getTransaction().commit();
-        System.out.println(libro.getTitolo() + " è stato aggiunto al catalogo!");
-        }
-        catch (Exception e) {
-            e.getMessage();
-        } finally {
-            em.close();
-        }
-    }
-    
-    public static void aggiungiRivista(Rivista rivista) {
-        try {
-        em.getTransaction().begin();
-        em.persist(rivista);
-        em.getTransaction().commit();
-        System.out.println(rivista.getTitolo() + " è stato aggiunto al catalogo!");
+        System.out.println(elem.getTitolo() + " è stato aggiunto al catalogo!");
         }
         catch (Exception e) {
             e.getMessage();
@@ -91,11 +81,11 @@ public class MainProject {
         }
     }
 
-//    public static List<Elemento> recuperaCatalogo(){
-//        em.getTransaction().begin();
-//        Query q = em.createNamedQuery("Elementi.FindAll");
-//        em.getTransaction().commit();
-//        return (List<Elemento>) q;
-//    }
+    public static List<SupportoCartaceo> recuperaCatalogo(){
+        em.getTransaction().begin();
+        Query q = em.createNamedQuery("SupportoCartaceo.findAll");
+        em.getTransaction().commit();
+        return q.getResultList();
+    }
 
 }

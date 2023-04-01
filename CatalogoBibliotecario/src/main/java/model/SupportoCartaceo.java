@@ -8,9 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.NamedQuery;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@NamedQuery(name = "SupportoCartaceo.findAll", query = "SELECT s FROM SupportoCartaceo s")
 public abstract class SupportoCartaceo {
 	
 	@Id
