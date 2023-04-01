@@ -43,14 +43,15 @@ public class MainProject {
         utente1.setCognome("D'Amico");
         utente1.setDataDiNascita(LocalDate.of(1992, 03, 12));
 
-       // aggiungiUtente(utente1);
+        //aggiungiUtente(utente1);
        // aggiungiElemento(libro1);
-       // aggiungiRivista(rivista1);
+      //  aggiungiElemento(rivista1);
         
         List<SupportoCartaceo> catalogo = recuperaCatalogo();
         catalogo.forEach(e -> System.out.println(e));
         
-        rimuoviElemento(1l);
+       // rimuoviElemento(1l);
+        System.out.println(ricercaPerIsbn(2l));
 
     }
 
@@ -95,6 +96,7 @@ public class MainProject {
     		em.getTransaction().begin();
     		Query querySelect = em.createQuery("DELETE SupportoCartaceo s WHERE s.codiceISBN = :id");
     		querySelect.setParameter("id", isbn);
+    		querySelect.executeUpdate();
     		em.getTransaction().commit();
     		System.out.println("elemento rimosso per codice: " + isbn);
     	} catch (Exception e) {
@@ -102,6 +104,25 @@ public class MainProject {
 		} finally {
 			em.close();
 		}
+    }
+    
+    public static SupportoCartaceo ricercaPerIsbn(Long isbn){
+    	
+    	try {
+    		em.getTransaction().begin();
+    		Query querySelect = em.createQuery("SELECT s FROM SupportoCartaceo s WHERE s.codiceISBN = :id");
+    		querySelect.setParameter("id", isbn);
+    		SupportoCartaceo list = (SupportoCartaceo) querySelect.getSingleResult();
+    		em.getTransaction().commit();
+    		System.out.println("stefano prende 9.34 nell'esecuzione di un tuffo carpiato");
+    		return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			em.close();
+		}
+    	
+    	return null;
     }
 
 }
