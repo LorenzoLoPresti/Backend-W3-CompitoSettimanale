@@ -10,6 +10,8 @@ import javax.persistence.Query;
 
 import model.Genere;
 import model.Libro;
+import model.Periodicità;
+import model.Rivista;
 import model.Utente;
 
 public class MainProject {
@@ -28,10 +30,11 @@ public class MainProject {
         libro1.setTitolo("I re sassoni");
         libro1.setGenere(Genere.STORICO);
 //
-//        Rivista rivista1 = new Rivista();
-//        rivista1.setAnnoPubblicazione(2022);
-//        rivista1.setNumeroPagine(34);
-//        rivista1.setTitolo("Kung fu magazine");
+        Rivista rivista1 = new Rivista();
+        rivista1.setAnnoPubblicazione(LocalDate.of(2012, 11, 11));
+        rivista1.setNumeroPagine(34);
+        rivista1.setTitolo("Kung fu magazine");
+        rivista1.setPeriodicità(Periodicità.MENSILE);
 
 
         Utente utente1 = new Utente();
@@ -40,7 +43,8 @@ public class MainProject {
         utente1.setDataDiNascita(LocalDate.of(1992, 03, 12));
 
        // aggiungiUtente(utente1);
-        aggiungiLibro(libro1);
+       // aggiungiLibro(libro1);
+        aggiungiRivista(rivista1);
 
     }
 
@@ -50,6 +54,20 @@ public class MainProject {
         em.persist(libro);
         em.getTransaction().commit();
         System.out.println(libro.getTitolo() + " è stato aggiunto al catalogo!");
+        }
+        catch (Exception e) {
+            e.getMessage();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public static void aggiungiRivista(Rivista rivista) {
+        try {
+        em.getTransaction().begin();
+        em.persist(rivista);
+        em.getTransaction().commit();
+        System.out.println(rivista.getTitolo() + " è stato aggiunto al catalogo!");
         }
         catch (Exception e) {
             e.getMessage();

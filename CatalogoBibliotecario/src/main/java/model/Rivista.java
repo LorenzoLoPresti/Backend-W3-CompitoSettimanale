@@ -3,6 +3,10 @@ package model;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,10 +16,12 @@ import javax.persistence.Table;
 public class Rivista{
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codiceISBN;
 	private String titolo;
 	private LocalDate annoPubblicazione;
 	private Integer numeroPagine;
+	@Enumerated(EnumType.STRING)
     private Periodicità periodicità;
 
 
