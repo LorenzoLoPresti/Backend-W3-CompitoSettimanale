@@ -15,6 +15,7 @@ import model.Rivista;
 import model.SupportoCartaceo;
 import model.Utente;
 
+
 public class MainProject {
 
     static EntityManagerFactory emf =Persistence.createEntityManagerFactory("CatalogoBibliotecario");
@@ -25,14 +26,14 @@ public class MainProject {
     public static void main(String[] args) {
 
         Libro libro1 = new Libro();
-        libro1.setAnnoPubblicazione(LocalDate.of(2012, 11, 11));
+        libro1.setAnnoPubblicazione(2012);
         libro1.setAutore("B. Cornwell");
         libro1.setNumeroPagine(564);
         libro1.setTitolo("I re sassoni");
         libro1.setGenere(Genere.STORICO);
 //
         Rivista rivista1 = new Rivista();
-        rivista1.setAnnoPubblicazione(LocalDate.of(2012, 11, 11));
+        rivista1.setAnnoPubblicazione(2020);
         rivista1.setNumeroPagine(34);
         rivista1.setTitolo("Kung fu magazine");
         rivista1.setPeriodicità(Periodicità.MENSILE);
@@ -51,7 +52,9 @@ public class MainProject {
         catalogo.forEach(e -> System.out.println(e));
         
        // rimuoviElemento(1l);
-        System.out.println(ricercaPerIsbn(2l));
+    //    System.out.println(ricercaPerIsbn(1l));
+        
+        ricercaPerAnno(libro1.getAnnoPubblicazione()).forEach(e -> System.out.println(e));
 
     }
 
@@ -115,6 +118,25 @@ public class MainProject {
     		SupportoCartaceo list = (SupportoCartaceo) querySelect.getSingleResult();
     		em.getTransaction().commit();
     		System.out.println("stefano prende 9.34 nell'esecuzione di un tuffo carpiato");
+    		return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			em.close();
+		}
+    	
+    	return null;
+    }
+    
+    public static List<SupportoCartaceo> ricercaPerAnno(int date){
+    	
+    	try {
+    		em.getTransaction().begin();
+    	     Query querySelect = em.createQuery("SELECT s FROM SupportoCartaceo s WHERE s.annoPubblicazione = :date");
+    	     querySelect.setParameter("date", date);
+    		List<SupportoCartaceo> list = querySelect.getResultList();
+    		em.getTransaction().commit();
+    		System.out.println("stefano prende 9.67 nell'esecuzione di un tuffo carpiato");
     		return list;
 		} catch (Exception e) {
 			// TODO: handle exception

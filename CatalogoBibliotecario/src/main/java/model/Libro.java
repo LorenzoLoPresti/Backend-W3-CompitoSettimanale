@@ -22,12 +22,12 @@ public class Libro extends SupportoCartaceo{
 
     }
 
-    public Libro(Long codiceISBN, String titolo,  LocalDate annoPubblicazione, Integer numeroPagine) {
+    public Libro(Long codiceISBN, String titolo,  int annoPubblicazione, Integer numeroPagine) {
         super(codiceISBN, titolo, annoPubblicazione, numeroPagine);
     }
 
 
-    public Libro(Long codiceISBN, String titolo, LocalDate annoPubblicazione, Integer numeroPagine, String autore,
+    public Libro(Long codiceISBN, String titolo, int annoPubblicazione, Integer numeroPagine, String autore,
             Genere genere) {
         super(codiceISBN, titolo, annoPubblicazione, numeroPagine);
         this.autore = autore;

@@ -17,12 +17,12 @@ public class Rivista extends SupportoCartaceo{
 	// COSTRUTTORE
 	public Rivista() {}	
 	
-	public Rivista(Long codiceISBN, String titolo, LocalDate annoPubblicazione, Integer numeroPagine) {
+	public Rivista(Long codiceISBN, String titolo, int annoPubblicazione, Integer numeroPagine) {
 		super(codiceISBN, titolo, annoPubblicazione, numeroPagine);
 		
 	}
 	
-	public Rivista(Long codiceISBN, String titolo, LocalDate annoPubblicazione, Integer numeroPagine, Periodicità periodicità) {
+	public Rivista(Long codiceISBN, String titolo, int annoPubblicazione, Integer numeroPagine, Periodicità periodicità) {
 		super(codiceISBN, titolo, annoPubblicazione, numeroPagine);
 		this.periodicità = periodicità;
 	}

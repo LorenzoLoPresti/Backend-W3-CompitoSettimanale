@@ -21,7 +21,7 @@ public abstract class SupportoCartaceo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codiceISBN;
 	private String titolo;
-	private LocalDate annoPubblicazione;
+	private int annoPubblicazione;
 	private Integer numeroPagine;
 	
 	
@@ -31,7 +31,7 @@ public abstract class SupportoCartaceo {
 	}
 	
 	
-	public SupportoCartaceo(Long codiceISBN, String titolo, LocalDate annoPubblicazione, Integer numeroPagine) {
+	public SupportoCartaceo(Long codiceISBN, String titolo, int annoPubblicazione, Integer numeroPagine) {
 		super();
 		this.codiceISBN = codiceISBN;
 		this.titolo = titolo;
@@ -57,11 +57,11 @@ public abstract class SupportoCartaceo {
 		this.titolo = titolo;
 	}
 	
-	public LocalDate getAnnoPubblicazione() {
+	public int getAnnoPubblicazione() {
 		return annoPubblicazione;
 	}
 	
-	public void setAnnoPubblicazione(LocalDate annoPubblicazione) {
+	public void setAnnoPubblicazione(int annoPubblicazione) {
 		this.annoPubblicazione = annoPubblicazione;
 	}
 	
