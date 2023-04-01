@@ -49,6 +49,8 @@ public class MainProject {
         
         List<SupportoCartaceo> catalogo = recuperaCatalogo();
         catalogo.forEach(e -> System.out.println(e));
+        
+        rimuoviElemento(1l);
 
     }
 
@@ -86,6 +88,20 @@ public class MainProject {
         Query q = em.createNamedQuery("SupportoCartaceo.findAll");
         em.getTransaction().commit();
         return q.getResultList();
+    }
+    
+    public static void rimuoviElemento(Long isbn) {
+    	try {
+    		em.getTransaction().begin();
+    		Query querySelect = em.createQuery("DELETE SupportoCartaceo s WHERE s.codiceISBN = :id");
+    		querySelect.setParameter("id", isbn);
+    		em.getTransaction().commit();
+    		System.out.println("elemento rimosso per codice: " + isbn);
+    	} catch (Exception e) {
+			e.getMessage();
+		} finally {
+			em.close();
+		}
     }
 
 }
