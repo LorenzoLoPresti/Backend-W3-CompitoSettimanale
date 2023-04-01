@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,11 +15,8 @@ import javax.persistence.Table;
 @Table(name = "utenti")
 public class Utente {
 
-	@Column
 	private String nome;
-	@Column
 	private String cognome;
-	@Column
 	private LocalDate dataDiNascita;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

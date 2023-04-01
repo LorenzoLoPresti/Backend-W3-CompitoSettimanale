@@ -21,7 +21,9 @@ public class Prestito {
 	@ManyToOne
 	private Utente utente;
 	@ManyToOne
-	private SupportoCartaceo elementoPrestato;
+	private Libro libroPrestato;
+	@ManyToOne
+	private Rivista rivistaPrestata;
 	@Column
 	private LocalDate inizioPrestito;
 	@Column
@@ -34,16 +36,7 @@ public class Prestito {
 		super();
 	}
 
-	public Prestito(Utente utente, SupportoCartaceo elementoPrestato, LocalDate inizioPrestito,
-			LocalDate dataRestituzionePrevista, LocalDate restituzioneEffettiva) {
-		super();
-		this.utente = utente;
-		this.elementoPrestato = elementoPrestato;
-		this.inizioPrestito = inizioPrestito;
-		this.dataRestituzionePrevista = dataRestituzionePrevista;
-		this.restituzioneEffettiva = restituzioneEffettiva;
-	}
-	
+
 	
 	// GETTER E SETTER
 	public Utente getUtente() {
@@ -54,13 +47,42 @@ public class Prestito {
 		this.utente = utente;
 	}
 
-	public SupportoCartaceo getElementoPrestato() {
-		return elementoPrestato;
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setElementoPrestato(SupportoCartaceo elementoPrestato) {
-		this.elementoPrestato = elementoPrestato;
+
+
+	public void setId(Long id) {
+		this.id = id;
 	}
+
+
+
+	public Libro getLibroPrestato() {
+		return libroPrestato;
+	}
+
+
+
+	public void setLibroPrestato(Libro libroPrestato) {
+		this.libroPrestato = libroPrestato;
+	}
+
+
+
+	public Rivista getRivistaPrestata() {
+		return rivistaPrestata;
+	}
+
+
+
+	public void setRivistaPrestata(Rivista rivistaPrestata) {
+		this.rivistaPrestata = rivistaPrestata;
+	}
+
+
 
 	public LocalDate getInizioPrestito() {
 		return inizioPrestito;
