@@ -1,29 +1,21 @@
 package MainProject;
 
 import java.time.LocalDate;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
 
 import model.Genere;
 import model.Libro;
 import model.Periodicità;
 import model.Rivista;
-import model.SupportoCartaceo;
 import model.Utente;
 
 
 public class MainProject {
 
-    static EntityManagerFactory emf =Persistence.createEntityManagerFactory("CatalogoBibliotecario");
-
-    // l'oggetto che mi servirà per comunicare col db
-    static EntityManager em = emf.createEntityManager();
+  
 
     public static void main(String[] args) {
+    	
+    	Funzionalità methods = new Funzionalità();
 
     	// LIBRI, RIVISTE, UTENTI
         Libro libro1 = new Libro();
@@ -74,9 +66,9 @@ public class MainProject {
 
         // AGGIUNGI ELEMENTO
         
-      // aggiungiUtente(utente1);
+      //  methods.aggiungiUtente(utente1);
       //  aggiungiElemento(rivista2);
-       // aggiungiElemento(libro4);
+      // methods.aggiungiElemento(libro4);
         
         // LISTA DI TUTTI GLI ELEMENTI
         
@@ -86,159 +78,30 @@ public class MainProject {
         
         // RIMUOVI ELEMENTO
         
-     //   rimuoviElemento(9l);
+     //  methods.rimuoviElemento(11l);
         
         
         // RICERCA PER ISBN
         
-     //   ricercaPerIsbn(1l);
+       // methods.ricercaPerIsbn(1l);
         
         
         // RICERCA PER ANNO
         
-       // ricercaPerAnno(libro1.getAnnoPubblicazione());
+       // methods.ricercaPerAnno(libro1.getAnnoPubblicazione());
 
         
         //RICERCA PER AUTORE
         
-       // ricercaPerAutore("Micano Stefali");
+       // methods.ricercaPerAutore("Micano Stefali");
         
         
         // RICERCA PER TITOLO O PARTE DI ESSO
        
-     //  ricercaPerTitolo("no");
+        // methods.ricercaPerTitolo("no");
     }
 
-    public static void aggiungiElemento(SupportoCartaceo elem) {
-        try {
-        em.getTransaction().begin();
-        em.persist(elem);
-        em.getTransaction().commit();
-        System.out.println(elem.getTitolo() + " è stato aggiunto al catalogo!");
-        }
-        catch (Exception e) {
-            e.getMessage();
-        } finally {
-            em.close();
-        }
-    }
-    
-
-    public static void aggiungiUtente(Utente utente) {
-        try {
-        em.getTransaction().begin();
-        em.persist(utente);
-        em.getTransaction().commit();
-        System.out.println(" Utente aggiunto!");
-        }
-        catch (Exception e) {
-            e.getMessage();
-        } finally {
-            em.close();
-        }
-    }
-
-    public static List<SupportoCartaceo> recuperaCatalogo(){
-        em.getTransaction().begin();
-        Query q = em.createNamedQuery("SupportoCartaceo.findAll");
-        em.getTransaction().commit();
-        return q.getResultList();
-    }
-    
-    public static void rimuoviElemento(Long isbn) {
-    	try {
-    		em.getTransaction().begin();
-    		Query querySelect = em.createQuery("DELETE SupportoCartaceo s WHERE s.codiceISBN = :id");
-    		querySelect.setParameter("id", isbn);
-    		querySelect.executeUpdate();
-    		em.getTransaction().commit();
-    		System.out.println("elemento rimosso per codice: " + isbn);
-    	} catch (Exception e) {
-			e.getMessage();
-		} finally {
-			em.close();
-		}
-    }
-    
-    public static SupportoCartaceo ricercaPerIsbn(Long isbn){
-    	
-    	try {
-    		em.getTransaction().begin();
-    		Query querySelect = em.createQuery("SELECT s FROM SupportoCartaceo s WHERE s.codiceISBN = :id");
-    		querySelect.setParameter("id", isbn);
-    		SupportoCartaceo list = (SupportoCartaceo) querySelect.getSingleResult();
-    		em.getTransaction().commit();
-    		System.out.println("La tua ricerca ha dato i seguenti risultati:");
-    		System.out.println(list.toString());
-    		return list;
-		} catch (Exception e) {
-			// TODO: handle exception
-		} finally {
-			em.close();
-		}
-    	
-    	return null;
-    }
-    
-    public static List<SupportoCartaceo> ricercaPerAnno(int date){
-    	
-    	try {
-    		em.getTransaction().begin();
-    	     Query querySelect = em.createQuery("SELECT s FROM SupportoCartaceo s WHERE s.annoPubblicazione = :date");
-    	     querySelect.setParameter("date", date);
-    		List<SupportoCartaceo> list = querySelect.getResultList();
-    		em.getTransaction().commit();
-    		System.out.println("La tua ricerca ha dato i seguenti risultati:");
-    		list.forEach(e -> System.out.println(e));
-    		return list;
-		} catch (Exception e) {
-			// TODO: handle exception
-		} finally {
-			em.close();
-		}
-    	
-    	return null;
-    }
-    
-  public static List<SupportoCartaceo> ricercaPerAutore(String author){
-    	
-    	try {
-    		em.getTransaction().begin();
-    		Query querySelect = em.createQuery("SELECT s FROM SupportoCartaceo s WHERE s.autore = :author");
-    		querySelect.setParameter("author", author);
-    		List<SupportoCartaceo> list = querySelect.getResultList();
-    		em.getTransaction().commit();
-    		System.out.println("La tua ricerca ha dato i seguenti risultati:");
-    		list.forEach(e -> System.out.println(e));
-    		return list;
-		} catch (Exception e) {
-			// TODO: handle exception
-		} finally {
-			em.close();
-		}
-    	
-    	return null;
-    }
   
-  public static List<SupportoCartaceo> ricercaPerTitolo(String title){
-  	
-  	try {
-  		em.getTransaction().begin();
-  		Query querySelect = em.createQuery("SELECT s FROM SupportoCartaceo s WHERE s.titolo LIKE :titolo");
-  		querySelect.setParameter("titolo", "%" + title + "%" );
-  		List<SupportoCartaceo> list = querySelect.getResultList();
-  		em.getTransaction().commit();
-  		System.out.println("La tua ricerca ha dato i seguenti risultati:");
-		list.forEach(e -> System.out.println(e));
-  		return list;
-		} catch (Exception e) {
-			// TODO: handle exception
-		} finally {
-			em.close();
-		}
-  	
-  	return null;
-  }
 
 
 }
