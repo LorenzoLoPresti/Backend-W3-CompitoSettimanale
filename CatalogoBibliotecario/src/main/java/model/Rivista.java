@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -9,7 +10,7 @@ import javax.persistence.Table;
 @Table(name = "riviste")
 public class Rivista extends SupportoCartaceo{
 	
-
+	@Column
 	private Periodicità periodicità;
 	
 	// COSTRUTTORE

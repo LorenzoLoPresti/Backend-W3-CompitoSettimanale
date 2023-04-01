@@ -2,12 +2,31 @@ package model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "prestiti")
 public class Prestito {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@ManyToOne
 	private Utente utente;
+	@ManyToOne
 	private SupportoCartaceo elementoPrestato;
+	@Column
 	private LocalDate inizioPrestito;
+	@Column
 	private LocalDate dataRestituzionePrevista; // (calcolata automaticamente a 30 gg dalla data inizio prestito)
+	@Column
 	private LocalDate restituzioneEffettiva;
 	
 	// COSTRUTTORE

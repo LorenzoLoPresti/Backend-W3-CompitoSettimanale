@@ -2,19 +2,23 @@ package model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class SupportoCartaceo {
 	
 	@Id
 	private Long codiceISBN;
+	@Column
 	private String titolo;
+	@Column
 	private LocalDate annoPubblicazione;
+	@Column
 	private Integer numeroPagine;
 	
 	

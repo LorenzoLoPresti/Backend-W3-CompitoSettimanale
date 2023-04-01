@@ -1,19 +1,38 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "utenti")
 public class Utente {
 
+	@Column
 	private String nome;
+	@Column
 	private String cognome;
+	@Column
 	private LocalDate dataDiNascita;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long numeroDiTessera;
+	
+	@OneToMany(mappedBy = "utente", cascade = CascadeType.ALL)
+	private Set<Prestito> listaPrestiti;
 	
 	// COSTRUTTORI
 	public Utente() {
 		super();
 	}
-	
 	
 
 	public Utente(String nome, String cognome, LocalDate dataDiNascita) {

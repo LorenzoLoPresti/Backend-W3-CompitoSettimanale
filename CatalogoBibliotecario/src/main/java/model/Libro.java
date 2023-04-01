@@ -2,14 +2,18 @@ package model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "libri")
 public class Libro extends SupportoCartaceo{
 
+	@Column
     private String autore;
+	@Column
     private Genere genere;
 
 //COSTRUTTORI
