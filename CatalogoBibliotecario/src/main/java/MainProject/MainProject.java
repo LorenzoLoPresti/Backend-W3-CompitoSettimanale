@@ -44,7 +44,7 @@ public class MainProject {
 
        // aggiungiUtente(utente1);
        // aggiungiLibro(libro1);
-        aggiungiRivista(rivista1);
+       // aggiungiRivista(rivista1);
 
     }
 
